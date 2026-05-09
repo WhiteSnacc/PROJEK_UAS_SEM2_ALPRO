@@ -6,22 +6,19 @@
 #include <QGridLayout>
 #include <QVector>
 #include <QLabel>
+#include <QPixmap>
+#include <QIcon>
 
 QT_BEGIN_NAMESPACE
-namespace Ui {
-class MainWindow;
-}
+namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
 
-// =====================================================
-// Struct untuk menyimpan data tiap sel di grid
-// =====================================================
 struct Cell {
-    bool hasMine = false;       // apakah sel ini mengandung bom?
-    bool isRevealed = false;    // apakah sudah dibuka?
-    bool isFlagged = false;     // apakah sudah diberi bendera?
-    int adjacentMines = 0;      // berapa bom di sekitarnya?
-    QPushButton* button = nullptr; // pointer ke tombol di UI
+    bool hasMine       = false;
+    bool isRevealed    = false;
+    bool isFlagged     = false;
+    int  adjacentMines = 0;
+    QPushButton* button = nullptr;
 };
 
 class MainWindow : public QMainWindow
@@ -33,52 +30,55 @@ public:
     ~MainWindow() override;
 
 private slots:
-    // Slot = fungsi yang dipanggil ketika ada signal (event)
-    void onCellLeftClicked();   // dipanggil saat klik kiri sel
-    void onCellRightClicked();  // dipanggil saat klik kanan sel
-    void onResetClicked();      // dipanggil saat tombol reset ditekan
+    void onCellLeftClicked();
+    void onCellRightClicked();
+    void onResetClicked();
 
 private:
     Ui::MainWindow *ui;
 
-    // =====================================================
-    // Konstanta ukuran game
-    // =====================================================
-    static const int ROWS = 9;
-    static const int COLS = 9;
+    static const int ROWS        = 9;
+    static const int COLS        = 9;
     static const int TOTAL_MINES = 10;
+    static const int CELL_SIZE   = 52;
 
-    // =====================================================
-    // Data game
-    // =====================================================
-    QVector<QVector<Cell>> grid; // grid 2D berisi data tiap sel
-    bool gameOver = false;
-    bool firstClick = true;      // bom ditempatkan setelah klik pertama
-    int revealedCount = 0;
-    int flagCount = 0;
+    QVector<QVector<Cell>> grid;
+    bool gameOver      = false;
+    bool firstClick    = true;
+    int  revealedCount = 0;
+    int  flagCount     = 0;
 
-    // =====================================================
-    // Widget UI
-    // =====================================================
-    QWidget* centralWidget;
+    QWidget*     centralWidget;
     QGridLayout* gridLayout;
-    QLabel* statusLabel;
-    QLabel* mineCountLabel;
+    QLabel*      statusLabel;
+    QLabel*      mineCountLabel;
     QPushButton* resetButton;
 
-    // =====================================================
-    // Fungsi-fungsi helper
-    // =====================================================
-    void setupUI();              // membuat semua widget
-    void initGrid();             // inisialisasi data grid
-    void placeMines(int safeRow, int safeCol); // taruh bom (hindari sel pertama)
-    void calculateNumbers();     // hitung angka tiap sel
-    void revealCell(int row, int col);         // buka satu sel
-    void floodFill(int row, int col);          // buka sel kosong berantai
-    void revealAllMines();       // tampilkan semua bom saat kalah
-    void checkWin();             // cek apakah sudah menang
-    bool isValid(int row, int col); // cek apakah koordinat valid
-    void updateMineCounter();    // update label jumlah bom
+    // Pixmap disimpan sebagai member — di-load sekali saat startup
+    QPixmap pxTileClose;
+    QPixmap pxTileOpen;
+    QPixmap pxMine;
+    QPixmap pxFlag;
+    QPixmap pxFaceNormal;
+    QPixmap pxFaceLose;
+    QPixmap pxFaceWin;
+
+    void loadPixmaps();
+    void setupUI();
+    void initGrid();
+    void placeMines(int safeRow, int safeCol);
+    void calculateNumbers();
+    void revealCell(int row, int col);
+    void floodFill(int row, int col);
+    void revealAllMines();
+    void checkWin();
+    bool isValid(int row, int col);
+    void updateMineCounter();
+
+    void applyTileClose(QPushButton* btn);
+    void applyTileOpen(QPushButton* btn);
+    void applyMine(QPushButton* btn, bool isHit);
+    void applyFlag(QPushButton* btn);
 };
 
 #endif // MAINWINDOW_H
