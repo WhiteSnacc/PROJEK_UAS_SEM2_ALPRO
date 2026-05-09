@@ -1,0 +1,12 @@
+<RCC>
+    <qresource prefix="/">
+        <file>images/tile_close.png</file>
+        <file>images/tile_open.png</file>
+        <file>images/mine.png</file>
+        <file>images/flag.png</file>
+        <file>images/face_normal.png</file>
+        <file>images/face_lose.png</file>
+        <file>images/face_win.png</file>
+        <file>images/app_icon.png</file>
+    </qresource>
+</RCC>
