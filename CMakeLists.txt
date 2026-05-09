@@ -23,6 +23,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(Minesweeper-by-kel4
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
+        resources.qrc
+        # images/app_icon.png images/face_lose.png images/face_normal.png images/face_win.png images/flag.png images/mine.png images/tile_close.png images/tile_open.png
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET Minesweeper-by-kel4 APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
