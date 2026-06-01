@@ -5,7 +5,7 @@ SetupDialog::SetupDialog(HighScoreManager* hsm, QWidget *parent)
     : QDialog(parent), hsManager(hsm)
 {
     setWindowTitle("Minesweeper — Setting");
-    setFixedSize(420, 420);
+    setFixedSize(420, 460);
     setWindowFlags(Qt::Dialog | Qt::MSWindowsFixedSizeDialogHint);
 
     setStyleSheet(
