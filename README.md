@@ -2,7 +2,7 @@
 Minesweeper classic game, based on Qt and C++ 
 
 #### Download Tutorial:
-1. Just download the 'Minesweeper-by-AlproGacor77.zip' file (click the below link)
+1. Just download the 'Minesweeper-by-AlproGacor77.zip' file (click the link below)
    > our Latest version: https://github.com/WhiteSnacc/PROJEK_UAS_SEM2_ALPRO/releases/tag/v0.1
 3. Extract the file
 4. Open 'Minesweeper-by-alprogacor77.exe'
